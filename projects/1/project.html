@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 1</title>
+  <link rel="stylesheet" href="./style.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Full-Screen Hero Section with Logo -->
+<header class="hero" data-aos="fade-in">
+  <img src="/assets/images/logo2.svg" alt="Your Logo" class="logo">
+  <h1>Project 1: Visual Showcase</h1>
+</header>
+
+<!-- Right Sidebar Navigation -->
+<aside class="scroll-navigation">
+  <ul>
+    <li><a href="#section1" data-section="section1" class="nav-dot active"></a></li>
+    <li><a href="#section2" data-section="section2" class="nav-dot"></a></li>
+    <li><a href="#section3" data-section="section3" class="nav-dot"></a></li>
+    <li><a href="#section4" data-section="section4" class="nav-dot"></a></li>
+    <li><a href="#section5" data-section="section5" class="nav-dot"></a></li>
+  </ul>
+</aside>
+
+<!-- Vertical Image Sections -->
+<section id="section1" class="image-section" data-aos="fade-up">
+  <img src="/assets/images/aqua_nova/1.png" alt="Project Image 1">
+</section>
+
+<section id="section2" class="image-section" data-aos="fade-up">
+  <img src="images/project1-image2.jpg" alt="Project Image 2">
+</section>
+
+<section id="section3" class="image-section" data-aos="fade-up">
+  <img src="images/project1-image3.jpg" alt="Project Image 3">
+</section>
+
+<section id="section4" class="image-section" data-aos="fade-up">
+  <img src="images/project1-image4.jpg" alt="Project Image 4">
+</section>
+
+<section id="section5" class="image-section" data-aos="fade-up">
+  <img src="images/project1-image5.jpg" alt="Project Image 5">
+</section>
+
+<!-- Footer Section -->
+<footer class="footer" data-aos="fade-in">
+  <p>Project 1 © Your Name</p>
+</footer>
+
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1200, // Duration of the animations
+  });
+
+  // JavaScript to handle the active class on scroll for right sidebar navigation
+  document.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('.image-section');
+    const navDots = document.querySelectorAll('.nav-dot');
+
+    let currentSection = '';
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollY >= sectionTop - sectionHeight / 3) {
+        currentSection = section.getAttribute('id');
+      }
+    });
+
+    navDots.forEach(dot => {
+      dot.classList.remove('active');
+      if (dot.dataset.section === currentSection) {
+        dot.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

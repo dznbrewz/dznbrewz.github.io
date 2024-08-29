@@ -1,0 +1,67 @@
+/* Full-Screen Hero Section with Spline */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--hero-bg-color);
+  overflow: hidden;
+}
+
+spline-viewer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Ensure it is behind the text */
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2; /* Make sure the text is on top */
+  color: var(--highlight-color);
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 3.5rem;
+}
+
+/* Grid Section */
+.grid-section {
+  padding: 50px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--grid-gap);
+  max-width: 1200px;
+  width: 100%;
+}
+
+.grid-item {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.grid-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.grid-item p {
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
+/* Additional styles here for other sections */

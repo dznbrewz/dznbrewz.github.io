@@ -1,0 +1,144 @@
+/* -----------------------------------*\
+  #PROJECT 1 PAGE CSS - Dark Theme
+\*-----------------------------------*/
+
+/* Root Variables for Colors and Font */
+:root {
+  --primary-bg-color: hsl(0, 0%, 10%);  /* Dark background */
+  --hero-bg-color: hsl(0, 0%, 8%);      /* Darker background for hero */
+  --text-color: hsl(0, 0%, 98%);        /* Light text color */
+  --highlight-color: hsl(45, 100%, 72%);
+  --light-gray: hsl(0, 0%, 84%);
+  --orange-yellow-crayola: hsl(45, 100%, 72%);
+  --smoky-black: hsl(0, 0%, 7%);
+  --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
+  --transition-1: 0.25s ease;
+  --font-family: 'Poppins', sans-serif;
+  --fs-small: 12px;
+  --fs-medium: 18px;
+  --fs-large: 24px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--primary-bg-color);
+  color: var(--text-color);
+  scroll-behavior: smooth;
+}
+
+/* Full-Screen Hero Section */
+.hero {
+  background-color: var(--hero-bg-color);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: var(--fs-large);
+  color: var(--orange-yellow-crayola);
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* Vertical Image Sections */
+.image-section {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.image-section img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20px;
+  box-shadow: var(--shadow-2);
+}
+
+/* Right Sidebar Navigation */
+.scroll-navigation {
+  position: fixed;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.scroll-navigation ul {
+  list-style: none;
+  padding: 0;
+}
+
+.scroll-navigation li {
+  margin-bottom: 20px;
+}
+
+.nav-dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--light-gray);
+  border-radius: 50%;
+  transition: background-color var(--transition-1);
+}
+
+.nav-dot.active {
+  background-color: var(--orange-yellow-crayola);
+}
+
+/* Footer Section */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background-color: var(--hero-bg-color);
+  color: var(--text-color);
+}
+
+/* Animations (AOS) */
+[data-aos] {
+  opacity: 0;
+  transition-property: opacity, transform;
+}
+
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: none;
+}
+
+/* Responsive Design */
+
+/* Larger than 768px (Tablets and larger) */
+@media (min-width: 768px) {
+  .hero h1 {
+    font-size: 4rem;
+  }
+}
+
+/* Smaller than 768px (Mobile) */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .scroll-navigation {
+    right: 20px;
+  }
+
+  .logo {
+    width: 120px;
+  }
+}
