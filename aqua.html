@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 1</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!--back button-->
+  <a href="index.html#projects" id="backButton" class="back-button">
+    <img src="./assets/images/back_button.png" alt="Back to Projects">
+  </a>
+<!-- Main Content Wrapper -->
+<main class="project-container">
+
+  <!-- Project Introduction -->
+  <section id="intro" class="project-intro">
+    <h1>Aqua Nova</h1>
+    <p>This project focuses on upgrading the design and user experience of the Firemen Nozzle. The goal was to improve aesthetics and functionality.</p>
+  </section>
+
+  <!-- Vertical Scrolling Image Section -->
+  <section id="section1" class="image-scroll-container">
+    <div id="image1" class="image-wrapper">
+      <img src="./assets/images/aqua_nova/1.jpg" alt="Project Image 1">
+    </div>
+    <div id="image2" class="image-wrapper">
+      <img src="./assets/images/aqua_nova/2.jpg" alt="Project Image 2">
+    </div>
+    <div id="image3" class="image-wrapper">
+      <img src="./assets/images/aqua_nova/3.jpg" alt="Project Image 3">
+    </div>
+    <div id="image4" class="image-wrapper">
+      <img src="./assets/images/aqua_nova/4.jpg" alt="Project Image 4">
+    </div>
+    <div id="image5" class="image-wrapper">
+      <img src="./assets/images/aqua_nova/5.jpg" alt="Project Image 5">
+    </div>
+    <div id="image6" class="image-wrapper">
+      <img src="./assets/images/aqua_nova/6.jpg" alt="Project Image 6">
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <p>Aqua Nova © Harsh P</p>
+  </footer>
+
+</main>
+
+<!-- Right Sidebar Navigation -->
+<aside class="scroll-navigation">
+  <ul>
+    <li><a href="javascript:void(0);" data-section="intro" class="nav-dot active"></a></li>
+    <li><a href="javascript:void(0);" data-section="image1" class="nav-dot"></a></li>
+    <li><a href="javascript:void(0);" data-section="image2" class="nav-dot"></a></li>
+    <li><a href="javascript:void(0);" data-section="image3" class="nav-dot"></a></li>
+    <li><a href="javascript:void(0);" data-section="image4" class="nav-dot"></a></li>
+    <li><a href="javascript:void(0);" data-section="image5" class="nav-dot"></a></li>
+    <li><a href="javascript:void(0);" data-section="image6" class="nav-dot"></a></li>
+  </ul>
+</aside>
+
+<script>
+  // JavaScript to handle the smooth scroll and active class on click
+  const navDots = document.querySelectorAll('.nav-dot');
+
+  navDots.forEach(dot => {
+    dot.addEventListener('click', function() {
+      const sectionId = dot.getAttribute('data-section');
+      const section = document.getElementById(sectionId);
+
+      // Smoothly scroll to the section without adding # to the URL
+      section.scrollIntoView({
+        behavior: 'smooth'
+      });
+
+      // Remove 'active' class from all dots and add it to the clicked dot
+      navDots.forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+    });
+  });
+
+  // JavaScript to handle the active class on scroll
+  document.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('.project-intro, .image-wrapper');
+
+    let currentSection = '';
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollY >= sectionTop - sectionHeight / 3) {
+        currentSection = section.getAttribute('id');
+      }
+    });
+
+    navDots.forEach(dot => {
+      dot.classList.remove('active');
+      if (dot.dataset.section === currentSection) {
+        dot.classList.add('active');
+      }
+    });
+  });
+
+  // JavaScript for fixing the back button
+  window.addEventListener('scroll', function() {
+    const backButton = document.getElementById('backButton');
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > 50) {
+        backButton.classList.add('visible');
+    } else {
+        backButton.classList.remove('visible');
+    }
+    }); 
+</script>
+
+</body>
+</html>
