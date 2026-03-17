@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { GraduationCap, Palette, Lightbulb, Cog, Shield, Trophy } from "lucide-react";
 import { TextReveal } from "./ui/TextReveal";
 
+const PORTRAIT_SRC = new URL("../../images/harsh.jpg", import.meta.url).href;
+
 const TIMELINE = [
   {
     year: "2022",
@@ -84,7 +86,7 @@ export function AboutSection() {
           <div className="relative w-full rounded-[2rem] overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-2xl shadow-black/10 dark:shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
             <motion.img
               style={{ y: imageY }}
-              src="/src/images/harsh.jpg"
+              src={PORTRAIT_SRC}
               alt="Designer Portrait"
               className="block w-full h-auto object-contain"
             />

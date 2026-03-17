@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
-const AUDIO_SRC = "/src/images/whispering.mp3";
+const AUDIO_SRC = new URL("../../images/whispering.mp3", import.meta.url).href;
 
 let sharedAudio: HTMLAudioElement | null = null;
 
