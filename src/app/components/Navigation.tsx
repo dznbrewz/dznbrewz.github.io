@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "motion/react";
 import { Download } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
+const CV_SRC = new URL("../../images/Harsh_cv.pdf", import.meta.url).href;
+
 const NAV_ITEMS = [
   { label: "Home", id: "hero" },
   { label: "Work", id: "projects" },
@@ -103,7 +105,7 @@ export function Navigation() {
             <div className="flex items-center gap-3">
               {/* CV download — desktop only */}
               <a
-                href="./cv.pdf"
+                href={CV_SRC}
                 download
                 className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1D1D1F] dark:bg-white text-white dark:text-[#0A1128] text-[12px] font-semibold tracking-wide hover:bg-black dark:hover:bg-gray-100 transition-colors duration-300"
               >
@@ -157,7 +159,7 @@ export function Navigation() {
                 </motion.button>
               ))}
               <motion.a
-                href="./cv.pdf"
+                href={CV_SRC}
                 download
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
