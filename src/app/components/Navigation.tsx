@@ -1,5 +1,7 @@
+import * as React from "react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { Download } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const NAV_ITEMS = [
@@ -99,6 +101,16 @@ export function Navigation() {
             </div>
 
             <div className="flex items-center gap-3">
+              {/* CV download — desktop only */}
+              <a
+                href="./cv.pdf"
+                download
+                className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1D1D1F] dark:bg-white text-white dark:text-[#0A1128] text-[12px] font-semibold tracking-wide hover:bg-black dark:hover:bg-gray-100 transition-colors duration-300"
+              >
+                <Download className="w-3.5 h-3.5" />
+                CV
+              </a>
+
               <ThemeToggle />
 
               {/* Mobile Menu Toggle */}
@@ -144,6 +156,18 @@ export function Navigation() {
                   {item.label}
                 </motion.button>
               ))}
+              <motion.a
+                href="./cv.pdf"
+                download
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ delay: NAV_ITEMS.length * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#1D1D1F] dark:bg-white text-white dark:text-[#0A1128] text-lg font-semibold tracking-wide mt-4 hover:bg-black dark:hover:bg-gray-100 transition-colors duration-300"
+              >
+                <Download className="w-5 h-5" />
+                Download CV
+              </motion.a>
             </div>
           </motion.div>
         )}

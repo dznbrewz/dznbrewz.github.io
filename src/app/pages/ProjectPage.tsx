@@ -26,6 +26,7 @@ export default function ProjectPage() {
   const slidesViewportRef = useRef<HTMLDivElement>(null);
   const slidesTrackRef = useRef<HTMLDivElement>(null);
   const [slidesMaxX, setSlidesMaxX] = useState(0);
+  const [slidesSectionHeightPx, setSlidesSectionHeightPx] = useState<number | null>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -36,35 +37,60 @@ export default function ProjectPage() {
 
   const slideImages = project.contentImages ?? [];
   const slidesCount = slideImages.length;
-  const slidesSectionHeightVh = useMemo(() => {
-    // More slides => longer vertical section to "drive" the horizontal motion.
-    // Tuned to feel responsive across trackpads and mouse wheels.
-    return Math.max(180, slidesCount * 90);
-  }, [slidesCount]);
 
+  // "end end" = progress reaches 1 exactly when the section's bottom
+  // hits the viewport's bottom, which is the same moment the sticky
+  // child starts to unpin.  This makes the math exact.
   const { scrollYProgress: slidesProgress } = useScroll({
     target: slidesSectionRef,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end end"],
   });
 
-  const slidesX = useTransform(slidesProgress, (v) => -slidesMaxX * v);
+  // Slides reach the last frame at 80 % progress, then DWELL there
+  // for the remaining 20 % so the user clearly sees the final slide
+  // before the section unpins and vertical scroll resumes.
+  const slidesX = useTransform(
+    slidesProgress,
+    [0, 0.8, 1],
+    [0, -slidesMaxX, -slidesMaxX],
+  );
 
   useLayoutEffect(() => {
-    const viewportEl = slidesViewportRef.current;
-    const trackEl = slidesTrackRef.current;
-    if (!viewportEl || !trackEl) return;
+    let t1: ReturnType<typeof setTimeout>;
+    let t2: ReturnType<typeof setTimeout>;
 
     const measure = () => {
+      const viewportEl = slidesViewportRef.current;
+      const trackEl = slidesTrackRef.current;
+      if (!viewportEl || !trackEl) return;
+
       const maxX = Math.max(0, trackEl.scrollWidth - viewportEl.clientWidth);
+      if (maxX === 0) return; // not ready yet — deferred retries will catch it
+
       setSlidesMaxX(maxX);
+
+      // With "end end" offset, scrollable distance = sectionHeight - vh.
+      // We want: 80 % of that distance covers slidesMaxX pixels of horizontal travel.
+      // → sectionHeight - vh = maxX / 0.8
+      // → sectionHeight = vh + maxX * 1.25
+      // Add half a viewport of extra so the dwell feels comfortable.
+      const vh = window.innerHeight;
+      setSlidesSectionHeightPx(vh + Math.round(maxX * 1.25) + Math.round(vh * 0.5));
     };
 
     measure();
+    t1 = setTimeout(measure, 120);
+    t2 = setTimeout(measure, 500);
 
     const ro = new ResizeObserver(measure);
-    ro.observe(viewportEl);
-    ro.observe(trackEl);
-    return () => ro.disconnect();
+    if (slidesViewportRef.current) ro.observe(slidesViewportRef.current);
+    if (slidesTrackRef.current) ro.observe(slidesTrackRef.current);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      ro.disconnect();
+    };
   }, [slidesCount]);
 
   return (
@@ -172,7 +198,7 @@ export default function ProjectPage() {
         <section
           ref={slidesSectionRef}
           className="relative"
-          style={{ height: `${slidesSectionHeightVh}vh` }}
+          style={{ height: slidesSectionHeightPx ? `${slidesSectionHeightPx}px` : `${(slidesCount + 2) * 100}vh` }}
         >
           <div className="sticky top-0 h-screen flex flex-col justify-center">
             <div className="max-w-7xl mx-auto w-full px-6 md:px-12">
@@ -185,9 +211,6 @@ export default function ProjectPage() {
                     Scroll down to move through the slides horizontally.
                   </p>
                 </div>
-                <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#86868B] dark:text-gray-500">
-                  {Math.round(slidesProgress.get() * 100)}%
-                </p>
               </div>
             </div>
 
@@ -213,7 +236,7 @@ export default function ProjectPage() {
                       <span>
                         Slide {idx + 1} / {slideImages.length}
                       </span>
-                      <span>1920×1080</span>
+                      <span></span>
                     </div>
                   </div>
                 ))}

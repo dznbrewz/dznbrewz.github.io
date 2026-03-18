@@ -1,6 +1,6 @@
 import * as React from "react";
 import { motion, useScroll, useTransform } from "motion/react";
-import { GraduationCap, Palette, Lightbulb, Cog, Shield, Trophy } from "lucide-react";
+import { GraduationCap, Palette, Cog, Trophy, Award } from "lucide-react";
 import { TextReveal } from "./ui/TextReveal";
 
 const PORTRAIT_SRC = new URL("../../images/harsh.jpg", import.meta.url).href;
@@ -13,9 +13,15 @@ const TIMELINE = [
     icon: <GraduationCap className="w-5 h-5" />,
   },
   {
+    year: "2023",
+    title: "The James Dyson Award",
+    desc: "Runner-up (India) for sustainable product innovation.",
+    icon: <Award className="w-5 h-5" />,
+  },
+  {
     year: "2024",
     title: "iF Design Award",
-    desc: "Winner for sustainable product innovation (Zero Brush).",
+    desc: "Winner for product design (Zero Brush).",
     icon: <Trophy className="w-5 h-5" />,
   },
   {

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion } from "motion/react";
+import { ChevronUp } from "lucide-react";
 import { ProjectCard } from "./ProjectCard";
 import { PROJECTS } from "../data/projects";
 
@@ -14,32 +15,48 @@ export function ProjectsSection() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [showAllInAllTab, setShowAllInAllTab] = useState(false);
 
+  // Count per category — interdisciplinary projects count in each of their tags
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: PROJECTS.length };
+    for (const project of PROJECTS) {
+      for (const tag of project.categoryTags) {
+        counts[tag] = (counts[tag] ?? 0) + 1;
+      }
+    }
+    return counts;
+  }, []);
+
+  const handleCategoryChange = (id: string) => {
+    setActiveCategory(id);
+    setShowAllInAllTab(false);
+  };
+
+  // Interdisciplinary projects show up under every one of their tags
   const filteredProjects =
     activeCategory === "all"
       ? PROJECTS
-      : PROJECTS.filter((p) => p.categoryTag === activeCategory);
+      : PROJECTS.filter((p) => p.categoryTags.includes(activeCategory));
 
-  // For the "All Works" tab, only surface one representative project per category by default
+  // "All Works" condensed view: one project per primary category (first tag)
   const condensedAllProjects = useMemo(() => {
-    if (activeCategory !== "all") return filteredProjects;
-
     const seen = new Set<string>();
-    const result: typeof filteredProjects = [];
-
+    const result: typeof PROJECTS = [];
     for (const project of PROJECTS) {
-      if (!seen.has(project.categoryTag)) {
-        seen.add(project.categoryTag);
+      const primary = project.categoryTags[0];
+      if (!seen.has(primary)) {
+        seen.add(primary);
         result.push(project);
       }
     }
-
     return result;
-  }, [activeCategory, filteredProjects]);
+  }, []);
 
   const projectsToRender =
     activeCategory === "all" && !showAllInAllTab
       ? condensedAllProjects
       : filteredProjects;
+
+  const hiddenCount = filteredProjects.length - condensedAllProjects.length;
 
   return (
     <section id="projects" className="py-32 px-6 md:px-12 max-w-7xl mx-auto relative z-20 bg-transparent">
@@ -58,7 +75,7 @@ export function ProjectsSection() {
           </p>
         </motion.div>
 
-        {/* Categories */}
+        {/* Category filter pills with counts */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -69,14 +86,23 @@ export function ProjectsSection() {
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-6 py-3 rounded-full text-[13px] font-semibold tracking-widest uppercase transition-all duration-500 ${
+              onClick={() => handleCategoryChange(cat.id)}
+              className={`px-6 py-3 rounded-full text-[13px] font-semibold tracking-widest uppercase transition-all duration-500 flex items-center gap-2 ${
                 activeCategory === cat.id
                   ? "bg-[#1D1D1F] dark:bg-white text-white dark:text-[#0A1128] shadow-[0_8px_30px_rgb(0,0,0,0.2)] dark:shadow-[0_8px_30px_rgb(255,255,255,0.2)]"
                   : "bg-white/50 dark:bg-white/10 text-[#1D1D1F] dark:text-gray-300 hover:bg-white dark:hover:bg-white/20 hover:shadow-md"
               }`}
             >
               {cat.label}
+              <span
+                className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                  activeCategory === cat.id
+                    ? "bg-white/20 dark:bg-black/20 text-white dark:text-[#0A1128]"
+                    : "bg-black/8 dark:bg-white/15 text-[#86868B] dark:text-gray-400"
+                }`}
+              >
+                {categoryCounts[cat.id] ?? 0}
+              </span>
             </button>
           ))}
         </motion.div>
@@ -84,23 +110,36 @@ export function ProjectsSection() {
 
       <div className="relative flex flex-col items-center">
         {projectsToRender.map((project, i) => (
-          <ProjectCard key={project.id} project={{ ...project, index: i }} total={projectsToRender.length} />
+          <ProjectCard
+            key={`${project.id}-${activeCategory}`}
+            project={{ ...project, index: i }}
+            total={projectsToRender.length}
+          />
         ))}
 
-        {activeCategory === "all" &&
-          !showAllInAllTab &&
-          filteredProjects.length > projectsToRender.length && (
-            <button
-              type="button"
-              onClick={() => setShowAllInAllTab(true)}
-              className="mt-16 inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/20 bg-white/70 dark:bg-white/10 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#1D1D1F] dark:text-gray-100 hover:bg-white dark:hover:bg-white/20 transition-all"
-            >
-              Show all projects
-              <span className="text-[10px] opacity-70">
-                ({filteredProjects.length - projectsToRender.length} more)
-              </span>
-            </button>
-          )}
+        {/* Expand button — shown when condensed and there are hidden projects */}
+        {activeCategory === "all" && !showAllInAllTab && hiddenCount > 0 && (
+          <button
+            type="button"
+            onClick={() => setShowAllInAllTab(true)}
+            className="mt-16 inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/20 bg-white/70 dark:bg-white/10 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#1D1D1F] dark:text-gray-100 hover:bg-white dark:hover:bg-white/20 transition-all"
+          >
+            Show all projects
+            <span className="text-[10px] opacity-70">({hiddenCount} more)</span>
+          </button>
+        )}
+
+        {/* Collapse button — shown when expanded */}
+        {activeCategory === "all" && showAllInAllTab && (
+          <button
+            type="button"
+            onClick={() => setShowAllInAllTab(false)}
+            className="mt-16 inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/20 bg-white/70 dark:bg-white/10 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#1D1D1F] dark:text-gray-100 hover:bg-white dark:hover:bg-white/20 transition-all"
+          >
+            <ChevronUp className="w-3.5 h-3.5" />
+            Collapse
+          </button>
+        )}
       </div>
     </section>
   );
