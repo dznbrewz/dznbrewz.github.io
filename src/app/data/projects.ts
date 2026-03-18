@@ -71,7 +71,7 @@ export const PROJECTS: Project[] = [
     image: new URL("../../images/zero_brush.jpg", import.meta.url).href,
     award: "iF DESIGN AWARD",
     tools: ["SolidWorks", "KeyShot", "Bio-Materials"],
-    year: "2024",
+    year: "2023",
     index: 2,
     contentImages: [
       new URL("../../images/ZB1.jpg", import.meta.url).href,
@@ -105,6 +105,29 @@ export const PROJECTS: Project[] = [
       new URL("../../images/pr7.jpg", import.meta.url).href,
       new URL("../../images/pr8.jpg", import.meta.url).href,
       new URL("../../images/pr9.jpg", import.meta.url).href,
+    ]
+  },
+  {
+    id: "aqua-nova",
+    title: "Aqua Nova",
+    category: "Industrial Design",
+    categoryTags: ["INDL"],
+    description:
+      "A firefighting nozzle to reduce the backforce and the torque on the firefighter's hand.",
+    details:
+      "Aqua Nova is a firefighting nozzle designed to reduce the backforce and the torque on the firefighter's hand. The nozzle is designed to be lightweight and durable, done with additive manufacturing and a comfortable handle to change modes.",
+    image: new URL("../../images/an.jpg", import.meta.url).href,
+    tools: ["SolidWorks", "Fusion 360", "KeyShot","Ntop"],
+    year: "2024",
+    index: 3,
+    contentImages: [
+      new URL("../../images/an1.jpg", import.meta.url).href,
+      new URL("../../images/an2.jpg", import.meta.url).href,
+      new URL("../../images/an3.jpg", import.meta.url).href,
+      new URL("../../images/an4.jpg", import.meta.url).href,
+      new URL("../../images/an5.jpg", import.meta.url).href,
+      new URL("../../images/an6.jpg", import.meta.url).href,
+      new URL("../../images/an7.jpg", import.meta.url).href,
     ]
   },
 ];
