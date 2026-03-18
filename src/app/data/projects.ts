@@ -91,7 +91,7 @@ export const PROJECTS: Project[] = [
       "A handheld device functioning as an alternative to traditional VR headsets. Projects spatial interfaces into physical environments.",
     details:
       "Projected Reality bridges the gap between physical and digital spaces without the isolation of traditional VR. The device uses depth-sensing and projection mapping to create interactive overlays on any surface, enabling collaborative spatial computing in architectural and industrial design workflows.",
-    image: new URL("../../images/pr.jpg", import.meta.url).href,
+    image: new URL("../../images/PR.jpg", import.meta.url).href,
     tools: ["Figma", "Arduino", "Unity", "CAD"],
     year: "2025",
     index: 3,
