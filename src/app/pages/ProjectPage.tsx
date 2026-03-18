@@ -10,9 +10,24 @@ export default function ProjectPage() {
   const { id } = useParams();
   const project = PROJECTS.find((p) => p.id === id);
 
-  // Scroll to top when the project changes
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  const [isTopReady, setIsTopReady] = useState(true);
+
+  // Snap to top instantly on navigation, but keep the page hidden
+  // until the scroll position has been applied, so users never see
+  // a brief “middle of the page” frame.
+  useLayoutEffect(() => {
+    const shouldHide = window.scrollY > 0;
+    setIsTopReady(!shouldHide);
+
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    if (!shouldHide) return;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => setIsTopReady(true));
+    });
   }, [id]);
 
   if (!project) {
@@ -94,7 +109,11 @@ export default function ProjectPage() {
   }, [slidesCount]);
 
   return (
-    <div className="min-h-screen bg-[#F5F5F7] dark:bg-[#0A1128] text-[#1D1D1F] dark:text-gray-100 selection:bg-[#0066CC]/20 selection:text-[#0066CC] font-sans antialiased relative pb-32 transition-colors duration-500">
+    <div
+      className="min-h-screen bg-[#F5F5F7] dark:bg-[#0A1128] text-[#1D1D1F] dark:text-gray-100 selection:bg-[#0066CC]/20 selection:text-[#0066CC] font-sans antialiased relative pb-32 transition-colors duration-500"
+      style={{ visibility: isTopReady ? "visible" : "hidden" }}
+      aria-hidden={!isTopReady}
+    >
       {/* Noise Overlay */}
       <div 
         className="pointer-events-none fixed inset-0 z-50 opacity-[0.03] mix-blend-overlay"
