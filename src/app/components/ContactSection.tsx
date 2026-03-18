@@ -34,7 +34,7 @@ export function ContactSection() {
           Be
         </span>
       ),
-      href: "https://www.behance.net/gallery/245122855/Industrial-design-portfolio-IITG-2026",
+      href: "https://www.behance.net/ls-harsh",
     },
   ];
 
