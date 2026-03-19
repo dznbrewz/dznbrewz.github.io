@@ -1,9 +1,14 @@
+import * as React from "react";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { TextReveal } from "./ui/TextReveal";
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -74,19 +79,21 @@ export function HeroSection() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <a
-            href="#projects"
+          <button
+            type="button"
+            onClick={() => scrollTo("projects")}
             className="group relative overflow-hidden px-10 py-4 rounded-full bg-[#1D1D1F] dark:bg-white text-white dark:text-[#0A1128] text-[15px] font-medium tracking-wide shadow-2xl shadow-black/20 dark:shadow-white/10 transition-all duration-300 hover:shadow-black/30 hover:-translate-y-1"
           >
             <span className="relative z-10">Explore Work</span>
             <div className="absolute inset-0 bg-white/20 dark:bg-black/10 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1] rounded-full" />
-          </a>
-          <a
-            href="#contact"
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollTo("contact")}
             className="group px-10 py-4 rounded-full bg-transparent text-[#1D1D1F] dark:text-white border border-black/10 dark:border-white/20 text-[15px] font-medium tracking-wide hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 hover:-translate-y-1"
           >
             Get in touch
-          </a>
+          </button>
         </motion.div>
       </motion.div>
 
