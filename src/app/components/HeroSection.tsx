@@ -39,7 +39,7 @@ export function HeroSection() {
       {/* Main content */}
       <motion.div
         style={{ y, opacity, scale }}
-        className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-20 md:pb-24 flex flex-col items-center text-center mt-[-5vh]"
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-8 md:pt-10 pb-20 md:pb-24 flex flex-col items-center text-center"
       >
         
         {/* Label */}
