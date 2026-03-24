@@ -16,50 +16,6 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    id: "moduleflow",
-    title: "ModuleFlow",
-    category: "Automotive / Mobility",
-    categoryTags: ["AUTO", "INDL"],
-    description:
-      "A transformable vehicle concept designed for the Toyota Logistic Design Competition. Modular architecture enabling multiple configurations for last-mile delivery.",
-    details:
-      "ModuleFlow reimagines urban logistics through a shape-shifting platform that adapts to cargo types. The design leverages parametric modeling and generative algorithms to optimize structural integrity across configurations. The exterior shell utilizes a self-healing polymer composite to withstand daily urban wear while maintaining a pristine appearance.",
-    image: new URL("../../images/MF.jpg", import.meta.url).href,
-    tools: ["Rhino", "Grasshopper", "KeyShot", "Alias"],
-    year: "2026",
-    index: 0,
-    contentImages: [
-      new URL("../../images/MF1.jpg", import.meta.url).href,
-      new URL("../../images/MF2.jpg", import.meta.url).href,
-      new URL("../../images/MF3.jpg", import.meta.url).href,
-      new URL("../../images/MF4.jpg", import.meta.url).href,
-      new URL("../../images/MF5.jpg", import.meta.url).href,
-      new URL("../../images/MF6.jpg", import.meta.url).href,
-    ]
-  },
-  {
-    id: "vajra",
-    title: "VAJRÄ",
-    category: "Industrial Design / Furniture",
-    categoryTags: ["INDL"],
-    description:
-      "A kneeling chair concept inspired by Milanese museum aesthetics. Merging ergonomic research with sculptural form to create a statement piece.",
-    details:
-      "VAJRÄ draws from the tension between classical Italian craftsmanship and contemporary computational design. The organic curves were generated through topology optimization, ensuring minimal material waste while maximizing structural performance. A balance of tension and compression creates a floating seating posture.",
-    image: new URL("../../images/vaj.jpg", import.meta.url).href,
-    tools: ["Rhino", "Grasshopper", "3D Print", "Fusion 360"],
-    year: "2025",
-    index: 1,
-    contentImages: [ 
-      new URL("../../images/vaj1.jpg", import.meta.url).href,
-      new URL("../../images/vaj2.jpg", import.meta.url).href,
-      new URL("../../images/vaj3.jpg", import.meta.url).href,
-      new URL("../../images/vaj4.jpg", import.meta.url).href,
-      new URL("../../images/vaj5.jpg", import.meta.url).href,
-      new URL("../../images/vaj6.jpg", import.meta.url).href,
-    ]
-  },
-  {
     id: "zero-brush",
     title: "Zero Brush",
     category: "Industrial Design",
@@ -72,7 +28,7 @@ export const PROJECTS: Project[] = [
     award: "iF DESIGN AWARD",
     tools: ["SolidWorks", "KeyShot", "Bio-Materials"],
     year: "2023",
-    index: 2,
+    index: 0,
     contentImages: [
       new URL("../../images/ZB1.jpg", import.meta.url).href,
       new URL("../../images/ZB2.jpg", import.meta.url).href,
@@ -94,7 +50,7 @@ export const PROJECTS: Project[] = [
     image: new URL("../../images/PR.jpg", import.meta.url).href,
     tools: ["Figma", "Arduino", "Unity", "CAD"],
     year: "2025",
-    index: 3,
+    index: 1,
     contentImages: [
       new URL("../../images/pr1.jpg", import.meta.url).href,
       new URL("../../images/pr2.jpg", import.meta.url).href,
@@ -105,6 +61,28 @@ export const PROJECTS: Project[] = [
       new URL("../../images/pr7.jpg", import.meta.url).href,
       new URL("../../images/pr8.jpg", import.meta.url).href,
       new URL("../../images/pr9.jpg", import.meta.url).href,
+    ]
+  },
+  {
+    id: "vajra",
+    title: "VAJRÄ",
+    category: "Industrial Design / Furniture",
+    categoryTags: ["INDL"],
+    description:
+      "A kneeling chair concept inspired by Milanese museum aesthetics. Merging ergonomic research with sculptural form to create a statement piece.",
+    details:
+      "VAJRÄ draws from the tension between classical Italian craftsmanship and contemporary computational design. The organic curves were generated through topology optimization, ensuring minimal material waste while maximizing structural performance. A balance of tension and compression creates a floating seating posture.",
+    image: new URL("../../images/vaj.jpg", import.meta.url).href,
+    tools: ["Rhino", "Grasshopper", "3D Print", "Fusion 360"],
+    year: "2025",
+    index: 2,
+    contentImages: [ 
+      new URL("../../images/vaj1.jpg", import.meta.url).href,
+      new URL("../../images/vaj2.jpg", import.meta.url).href,
+      new URL("../../images/vaj3.jpg", import.meta.url).href,
+      new URL("../../images/vaj4.jpg", import.meta.url).href,
+      new URL("../../images/vaj5.jpg", import.meta.url).href,
+      new URL("../../images/vaj6.jpg", import.meta.url).href,
     ]
   },
   {
@@ -128,6 +106,28 @@ export const PROJECTS: Project[] = [
       new URL("../../images/an5.jpg", import.meta.url).href,
       new URL("../../images/an6.jpg", import.meta.url).href,
       new URL("../../images/an7.jpg", import.meta.url).href,
+    ]
+  },
+  {
+    id: "moduleflow",
+    title: "ModuleFlow",
+    category: "Automotive / Mobility",
+    categoryTags: ["AUTO", "INDL"],
+    description:
+      "A transformable vehicle concept designed for the Toyota Logistic Design Competition. Modular architecture enabling multiple configurations for last-mile delivery.",
+    details:
+      "ModuleFlow reimagines urban logistics through a shape-shifting platform that adapts to cargo types. The design leverages parametric modeling and generative algorithms to optimize structural integrity across configurations. The exterior shell utilizes a self-healing polymer composite to withstand daily urban wear while maintaining a pristine appearance.",
+    image: new URL("../../images/MF.jpg", import.meta.url).href,
+    tools: ["Rhino", "Grasshopper", "KeyShot", "Alias"],
+    year: "2026",
+    index: 4,
+    contentImages: [
+      new URL("../../images/MF1.jpg", import.meta.url).href,
+      new URL("../../images/MF2.jpg", import.meta.url).href,
+      new URL("../../images/MF3.jpg", import.meta.url).href,
+      new URL("../../images/MF4.jpg", import.meta.url).href,
+      new URL("../../images/MF5.jpg", import.meta.url).href,
+      new URL("../../images/MF6.jpg", import.meta.url).href,
     ]
   },
 ];

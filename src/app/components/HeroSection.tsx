@@ -22,7 +22,7 @@ export function HeroSection() {
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-24 md:pb-32"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-32 md:pb-40"
     >
       {/* Soft Animated Background Orbs */}
       <motion.div 
@@ -37,7 +37,10 @@ export function HeroSection() {
       />
 
       {/* Main content */}
-      <motion.div style={{ y, opacity, scale }} className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center text-center mt-[-5vh]">
+      <motion.div
+        style={{ y, opacity, scale }}
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-20 md:pb-24 flex flex-col items-center text-center mt-[-5vh]"
+      >
         
         {/* Label */}
         <motion.div
@@ -99,7 +102,7 @@ export function HeroSection() {
 
       {/* Scroll indicator – kept above section edge so it doesn’t overlap next content */}
       <motion.div
-        className="absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+        className="absolute z-20 pointer-events-none bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
